@@ -3,29 +3,9 @@ import { v4 as uuid } from 'uuid';
 import { Car } from './interfaces/car.interface';
 import { CreateCarDto, UpdateCarDto } from './dto';
 
-
 @Injectable()
 export class CarsService {
-  private cars: Car[] = [
-    {
-      id: uuid(),
-      brand: 'BMW',
-      model: 'X6',
-      year: 2020,
-    },
-    {
-      id: uuid(),
-      brand: 'Audi',
-      model: 'Q7',
-      year: 2019,
-    },
-    {
-      id: uuid(),
-      brand: 'Mercedes',
-      model: 'GLE',
-      year: 2020,
-    },
-  ];
+  private cars: Car[] = [];
 
   getAllCars() {
     return this.cars;
@@ -39,33 +19,37 @@ export class CarsService {
     return car;
   }
 
-  createCar(createCarDto: CreateCarDto){
-    const newCar:Car = {
+  createCar(createCarDto: CreateCarDto) {
+    const newCar: Car = {
       id: uuid(),
-      ...createCarDto
-    }
+      ...createCarDto,
+    };
 
     this.cars.push(newCar);
     return newCar;
   }
 
-  updateCar(id: string, updateCarDto: UpdateCarDto){
+  updateCar(id: string, updateCarDto: UpdateCarDto) {
     let carDB = this.getCardById(id);
 
     this.cars = this.cars.map((car) => {
       if (car.id === id) {
-        carDB = { ...carDB, ...updateCarDto, id}
-        return carDB
+        carDB = { ...carDB, ...updateCarDto, id };
+        return carDB;
       }
       return car;
     });
 
-    return carDB
+    return carDB;
   }
 
-  deleteCar(id: string){
+  deleteCar(id: string) {
     this.getCardById(id);
     this.cars = this.cars.filter((car) => car.id !== id);
-    return this.cars
+    return this.cars;
+  }
+
+  fillCarsWithSeedData(cars: Car[]) {
+    this.cars = cars;
   }
 }
