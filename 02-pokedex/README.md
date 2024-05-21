@@ -13,6 +13,11 @@ $ yarn install
 ```bash
 # DB
 $ docker-compose up -d
+```
+
+# Populate DB
+http://localhost:3000/api/v1/seed
+
 
 # development
 $ yarn run start
