@@ -16,15 +16,31 @@ $ docker-compose up -d
 ```
 
 # Populate DB
+
 http://localhost:3000/api/v1/seed
 
-
 # development
+
 $ yarn run start
 
 # watch mode
+
 $ yarn run start:dev
 
+# production build
+
+1. Crear archivo `.env.prod`
+2. Llenar las variables de entorno
+3. Crear la nueva imagen
+
+````
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+
+````
+4. Levantar Imagen
+````
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up -d
+````
 # production mode
 $ yarn run start:prod
 ```
